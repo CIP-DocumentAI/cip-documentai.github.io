@@ -3,6 +3,9 @@
 <head>
   <!-- Metadata and links omitted for brevity -->
   <style>
+    body {
+      font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -56,6 +59,9 @@
     .highlight {
       color: #FFA500;
       font-weight: bold;
+    }
+    ::selection {
+      background: #FED136; /* 可选：选中的背景色 */
     }
     /* Sidebar Styles */
     nav {
@@ -272,6 +278,7 @@
       color: #777;
     }
     
+    
     #copyButton {
         position: absolute;
         right: 10px;
@@ -292,7 +299,7 @@
     }
 </style>
 </head>
-<body>
+
 
   <nav>
     <ul style="display: flex; justify-content: center; list-style: none; padding: 0; background-color: #1c1a1a;; margin: 0;">
@@ -350,6 +357,10 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <!-- Custom Fonts -->
+  <link href="./css/font-awesome.min.css" rel="stylesheet" >
+  <link href="./css/style.css" rel="stylesheet">
+  
 </head>
 
 
@@ -462,14 +473,14 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified"><p class="text-muted-abs">
-          Document Image Machine Translation (DIMT) task aims to translate
+          <b>Document Image Machine Translation (DIMT)</b> task aims to translate
           text embedded in document images from one language to another.
           It’s a multi-modal task that requires the integration of both textual
           content and document layout, bridging the gap between optical
           character recognition (OCR) and natural language processing (NLP).
           The proposed DIMT 2025 Challenge aims to advance research in
           end-to-end document image machine translation, a rapidly evolving area in multi-modal document understanding. The competition
-          consists of two tracks: OCR-free and OCR-based, each offering two
+          consists of two tracks: <b>OCR-free and OCR-based</b>, each offering two
           subtasks—small models and large models. Participants can choose
           whether or not to utilize OCR results but must implement a single, end-to-end DIMT model. By promoting innovative end-to-end
           document translation techniques, this challenge seeks to push the
@@ -497,27 +508,27 @@
           <img src="./static/images/figures1.png" alt="Motivating example image showing contextually-dependent translations of EXIT from English to German" class="image-half-width" style="margin-top: -1cm; margin-bottom: 1.2cm;">
           <figcaption><b>Figure 1: Document image examples of the DIMT 2025 challenge. <br>(a)(b): Web document examples in Track 1; (c)(d): arXiv
             document examples in Track 2.</b></figcaption> <br>
-          <p class="content-centered">
+          <p class="content-centered text-muted-abs" >
             Document images such as scans and PDF renderings are important
             carriers of human knowledge. With the advancement of digitalization, techniques for automatically recognizin, understanding
-            , and translating document images have become a crucial part of digital transformation. Among them, Document Image
-            Machine Translation (DIMT) is not only necessary for real-world
+            , and translating document images have become a crucial part of digital transformation. Among them, <b>Document Image
+            Machine Translation (DIMT)</b> is not only necessary for real-world
             communication but also essential for many downstream tasks, such
             as cross-lingual document retrieval, summarization, and
             information extraction. Over the past few years, DIMT technology has achieved remarkable progress with the development of
             deep learning. However, existing technologies are difficult
             to meet the demand for practical applications. The main reasons
             lie in the following aspects:
-            (1) Multi-modality and cross-linguality: Due to the inherent
+            <b>(1) Multi-modality and cross-linguality</b>: Due to the inherent
             multi-modality nature, real-world document images often
             involve a intricate combination of complex layout, dense
             text, and visually-rich elements, resulting in difficulties in
             their comprehensive understanding and the cross-lingual
             translation.
-            (2) Image and text noise: Many factors such as image defect or
+            <b>(2) Image and text noise</b>: Many factors such as image defect or
             OCR error may cause noise to the image or text as model
             input, leading to additional challenges to a DITM system.
-            (3) Lack of samples and a unified benchmark: Due to the high
+            <b>(3) Lack of samples and a unified benchmark</b>: Due to the high
             annotation cost and different annotation protocals, existing
             datasets often suffer insufficient samples, inconsistent labels
             and evaluation metrics, resulting in model performance that
@@ -538,53 +549,53 @@
 </section>
 
 <!-- MIMETIC2 Architecture -->
-<section class="section" id="tracks">
+<section class="section" id="tracks"">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
         <h2 class="title is-3 title-centered">Tracks</h2>
         <div class="hero-body">
-          <p class="content-centered">
+          <p class="content-centered text-muted-abs">
             Based on the input type, we release two tracks:<br/> <b>1) OCR-based DIMT</b>,
             where model inputs include the image and its OCR results (word
-            and word bounding box). <br/><b>2) OCR-free DIMT</b>, where model input is
+            and word bounding box). <br/> <b>2) OCR-free DIMT</b>, where model input is
             the image. Both tracks are given English document images and are
-            required to translate them to Chinese.<br>
-            <br/><p style="text-align: center;font-size: 18px;"><b>Track 1. OCR-based DIMT</b></p><br>
-            <p style="text-align: left; font-size: 18px;">This track focuses on translating text from document images where
+            required to translate them to Chinese. <br>
+            <br/><p style="text-align: center;font-size: 18px;" class="text-muted-abs"><b>Track 1. OCR-based DIMT</b></p><br>
+            <p style="text-align: left; font-size: 18px;" class="text-muted-abs">This track focuses on translating text from document images where
             OCR results (containing words and word bounding boxes) are provided. The task aims to generate an intact, ordered target translation
             from the raw, often chaotic OCR-extracted words in an end-to-end
             manner. Participants are required to handle misordered, fragmented,
             or disjointed OCR outputs and accurately reorder them while translating the text into the target language. The goal is to produce
             a coherent and structured target-language text that reflects the
             original document’s content and layout, ensuring the translation
-            maintains both meaning and order.<br/>
+            maintains both meaning and order.<br/><br/>
             <b>Track 1.1 OCR-based DIMT-LLM:</b> aims to evaluate the performance of LLM-based methods on the DIMT task. In this sub-track,
             participants must use large language models (LLMs) with over 1 billion parameters to achieve the OCR-based DIMT task. Open-source
             LLMs can be utilized, and participants are allowed to fine-tune
             these models to improve performance. The number of parameters
             in the model must be specified in the submitted reports used during
-            inference.<br/>
+            inference.<br/><br/>
             <b>Track 1.2 OCR-based DIMT-Small:</b> aims to evaluate the performance of small model-based methods on the DIMT task. In this
             sub-track, participants are only allowed to use small models, where
             the number of parameters is fewer than 1 billion, to achieve the
             OCR-based DIMT task. Participants must focus on optimizing these
             smaller models for accurate translation and reordering. The number of parameters in the model must be specified in the submitted
             reports used during inference.</p>
-            <br/><p style="text-align: center;font-size: 18px;"><b>Track 2. OCR-free DIMT</b></p><br>
-            <p style="text-align: left; font-size: 18px;">This track focuses on an OCR-free approach to Document Image
+            <br/><p style="text-align: center;font-size: 18px;" class="text-muted-abs"><b>Track 2. OCR-free DIMT</b></p><br>
+            <p style="text-align: left; font-size: 18px;" class="text-muted-abs">This track focuses on an OCR-free approach to Document Image
             Machine Translation, where participants are tasked with translating a source document image directly into a markdown-formatted
             target translation without any OCR assistance in an end-to-end
             way. In the OCR-free scene, participants must handle the complex
             layout and contextual information directly from the image, delivering a coherent and accurate translation in the target language.
             The final submission must follow markdown format reflecting the
-            content and layout of the original document.<br/>
+            content and layout of the original document.<br/><br/>
             <b>Track 2.1 OCR-free DIMT-LLM:</b> aims to evaluate the performance of LLM-based methods on the OCR-free DIMT task. In
             this sub-track, participants must use large language models (LLMs)
             with over 1 billion parameters to achieve the OCR-free DIMT task.
             Open-source LLMs can be utilized and fine-tuned to handle complex layouts and long context translation. Participants must specify
             the number of parameters in the model used during inference in
-            their submitted reports.<br/>
+            their submitted reports.<br/><br/>
             <b>Track 2.2 OCR-free DIMT-Small:</b> aims to evaluate the performance of small model-based methods on the OCR-free DIMT
             task. In this sub-track, participants are only permitted to use small
             models with fewer than 1 billion parameters to achieve the OCRfree DIMT task. Participants must work within these constraints,
@@ -608,14 +619,14 @@
       <div class="column is-full">
         <h2 class="title is-3 title-centered">Dataset</h2>
         <div class="hero-body">
-          <p class="content-centered">
+          <p class="content-centered text-muted-abs">
             The competitition dataset statistics are summarized in Table 1:
-            For Track 1, we provide a train set containing 300K images and a
+            <b>For Track 1</b>, we provide a train set containing 300K images and a
             valid set of 1K images. All images are converted from open-source
             web documents available on the internet. Each image is accompanied by corresponding OCR results (word and word bounding box),
             word-level reading order index, sentence-level and document-level
             translation.
-            For Track 2, we provide a train set containing 124K images
+            <b>For Track 2</b>, we provide a train set containing 124K images
             and a valid set of 1K images. All images are converted from PDF
             and latex files crawled from Arixv. Each image is accompanied by
             corresponding source language text and target language text inmarkdown format. For details of the dataset, please refer to our
@@ -665,12 +676,12 @@
       <div class="column is-full">
         <h2 class="title is-3 title-centered">Evaluation Metrics</h2>
         <div class="hero-body">
-          <p class="content-centered">
+          <p class="content-centered text-muted-abs">
             We will provide evaluation scripts for both tracks:
-            For Track 1, the metric is document-level BLEU and chrF++
+            <b>For Track 1</b>, the metric is document-level BLEU and chrF++
             for both translated target language text and reordered source
             language text.
-            For Track 2, the metric is document-level BLEU, chrF++ and
+            <b>For Track 2</b>, the metric is document-level BLEU, chrF++ and
             BLEU-PT for translated target language text in markdown format.
             As the translated texts contain formulas and tables in markdown
             format that influence the BLEU computing, we remove them from
