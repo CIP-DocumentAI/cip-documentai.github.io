@@ -59,43 +59,66 @@
     }
     /* Sidebar Styles */
     nav {
-      position: fixed;
-      left: 0;
+      position: fixed; /* 保持导航栏固定 */
       top: 0;
-      width: 200px;
-      height: 100%;
-      background-color: #f4f4f4;
-      padding: 20px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
+      left: 0;
+      width: 100%;
+      height: 60px; /* 设置更高的导航栏高度，比如 80px */
+      background-color: #1c1a1a;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center; /* 确保导航项垂直居中 */
     }
 
     nav ul {
+      display: flex;
       list-style: none;
+      margin: 0;
       padding: 0;
     }
 
     nav li {
-      margin: 15px 0;
+      margin: 0 15px;
     }
 
     nav a {
       text-decoration: none;
-      color: #333;
+      color: white;
+      font-weight: bold; /* 设置字体加粗 */
       font-size: 1rem;
+      padding: 20px 15px; /* 增加上下的内边距 */
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
-
-    nav a:hover {
-      color: #9da7b3;
+    nav ul li a:target, /* 高亮选中的锚点 */
+    nav ul li a.active {
+      background-color: #FED136; /* 当前选中项背景色 */
+      color: black; /* 当前选中项文字颜色 */
+      font-weight: bold; /* 加粗显示 */
     }
-
+    nav ul li a:hover {
+      color: #FED136; /* 悬停时变成白色（可选） */
+    }
+    /* 禁用 active 状态时的悬停效果 */
+    nav ul li a.active:hover {
+      background-color: #FED136; /* 保持高亮背景色不变 */
+      color: black; /* 保持字体颜色不变 */
+    }
     /* Main Content Styles */
     main {
-      margin-left: 220px; /* Sidebar width + margin */
+      margin-top: 10px; /* 设置与导航栏高度一致的顶部间距 */
       padding: 20px;
-      flex-grow: 1;
+    }
+    .navbar {
+      height: 80px !important;
     }
 
+    .navbar-item {
+      padding: 20px 15px !important;
+    }
+    
     @font-face {
       font-family: 'xkcd-script';
       src: url('fonts/xkcd-script.woff') format('woff'),
@@ -271,19 +294,18 @@
 </head>
 <body>
 
-  <!-- Sidebar -->
-<nav>
-  <ul>
-    <li><a href="#abstract">Abstract</a></li>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#tracks">Tracks</a></li>
-    <li><a href="#dataset">Dataset</a></li>
-    <li><a href="#evaluation">Evaluation Metrics</a></li>
-    <li><a href="#schedule">Schedule</a></li>
-    <li><a href="#bibtex">Cite Us</a></li>
-    <li><a href="#Organizer">Organizer</a></li>
-  </ul>
-</nav>
+  <nav>
+    <ul style="display: flex; justify-content: center; list-style: none; padding: 0; background-color: #1c1a1a;; margin: 0;">
+      <li style="margin: 0 15px;"><a href="#abstract">Abstract</a></li>
+      <li style="margin: 0 15px;"><a href="#introduction">Introduction</a></li>
+      <li style="margin: 0 15px;"><a href="#tracks">Tracks</a></li>
+      <li style="margin: 0 15px;"><a href="#dataset">Dataset</a></li>
+      <li style="margin: 0 15px;"><a href="#evaluation">Evaluation Metrics</a></li>
+      <li style="margin: 0 15px;"><a href="#schedule">Schedule</a></li>
+      <li style="margin: 0 15px;"><a href="#bibtex">Cite Us</a></li>
+      <li style="margin: 0 15px;"><a href="#Organizer">Organizer</a></li>
+    </ul>
+  </nav>
 
 
 <html>
@@ -294,7 +316,7 @@
         Machine Translation Towards Complex Layouts of Text in Natural Images">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ICDAR 2025 Competition on End-to-End Document Image
+  <title >ICDAR 2025 Competition on End-to-End Document Image
     Machine Translation Towards Complex Layouts of Text in Natural Images</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -329,18 +351,19 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
+
+
+
+
 <body>
-
-
-
-
 <!-- Title -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h2 class="title is-2 publication-title" style>ICDAR 2025 Competition on End-to-End Document Image
+          <h2 class="title is-2 publication-title" style="margin-top: 30px">ICDAR 2025 Competition on End-to-End Document Image
             Machine Translation Towards Complex Layouts of Text in Natural Images</h2>
           <div class="is-size-5 publication-authors">
             <!-- First row of authors -->
@@ -465,7 +488,7 @@
 
 
 <!-- Benchmark Overview -->
-<section class="architecture" id="introduction">
+<section class="architecture" id="introduction" style="scroll-margin-top: 20px;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
@@ -579,7 +602,7 @@
 
 
 <!-- Benchmark Overview -->
-<section class="architecture" id="dataset">
+<section class="architecture" id="dataset" style="scroll-margin-top: 20px;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
@@ -659,7 +682,7 @@
   </div>
 </section>
 
-<section class="architecture" id="schedule">
+<section class="architecture" id="schedule" style="scroll-margin-top: 20px;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
@@ -765,7 +788,7 @@
   </div>
 </section>
 
-<section class="architecture" id="Organizer">
+<section class="architecture" id="Organizer" style="scroll-margin-top: 20px;">
   <div class="container">
     <h2 class="title is-3 title-centered">Organizer</h2><br>
     <div class="team">
@@ -874,8 +897,36 @@
     </div>
   </div>
 </footer>
-
-
-
 </body>
 </html>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 获取所有的导航链接和页面中的锚点内容部分
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let currentSection = "";
+
+      // 遍历所有的 section，检查当前滚动到的部分
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 70; // 考虑导航栏的高度（70px）
+        const sectionHeight = section.offsetHeight;
+
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+
+      // 根据当前的 section，高亮导航栏中的对应链接
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").substring(1) === currentSection) {
+          link.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
