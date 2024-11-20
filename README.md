@@ -1,7 +1,5 @@
-# cip-documentai.github.io
 
-This repository is based on the code from the [Nerfies](https://nerfies.github.io) and [Van Goghs](https://how-many-van-goghs-does-it-take.github.io) websites. If you reuse this code, please credit them.
-
+[cip-documentai.github.io](https://cip-documentai.github.io)
 
 
 # Website License
