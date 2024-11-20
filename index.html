@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadata and links omitted for brevity -->
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .team {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 每行三列 */
+      gap: 10px; /* 每个成员间的间距 */
+      justify-items: center; /* 内容水平居中 */
+      margin-left: 10%;
+      margin-right:10%;
+    }
+
+    .member {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 5px;
+      border: 4px solid #a7b3c0;
+    }
+
+    .member h3 {
+      margin: 5px 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .member p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .highlight {
+      color: #FFA500;
+      font-weight: bold;
+    }
+    /* Sidebar Styles */
+    nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #f4f4f4;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 15px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      color: #9da7b3;
+    }
+
+    /* Main Content Styles */
+    main {
+      margin-left: 220px; /* Sidebar width + margin */
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    @font-face {
+      font-family: 'xkcd-script';
+      src: url('fonts/xkcd-script.woff') format('woff'),
+           url('fonts/xkcd-script.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }  
+
+    .title-centered {
+      text-align: center;
+    }
+    .image-centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%; /* Increased width for larger image */
+    }
+    .image-bigger {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 750%; /* Increased width for larger image */
+    }
+    .image-half-width {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%; /* Set width to 50% */
+    }
+    .image-smaller {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%; /* Set width to 50% */
+    }
+    .content-centered {
+        text-align: justify; /* Aligns text like the abstract */
+        font-size: 18px; /* Matches the abstract font size */
+    }
+    
+    .section {
+        background-color: #f5f5f5; /* Consistent background like the abstract */
+    }
+    .subtitle {
+        margin-top: 20px; /* Adds space between image and text */
+        font-size: 1rem; /* Matches the abstract font size */
+    }
+    .light-section {
+        background-color: #f5f5f5; /* Light gray background */
+    }
+    .dark-section {
+        background-color: #ffffff; /* White background */
+    }
+    .architecture {
+        padding-top: 25pt; /* space above h2 in arch sections */
+    }
+    .vistra {
+        font-variant: small-caps; /* benchmark name in small-caps */
+    }
+
+    .slider-container {
+        position: relative;
+        height: 100px; /* Ensure this matches the instruction height */
+        margin-top: -70px; /* Apply negative margin to close the gap */
+        margin-bottom: 50px; /* Keep the original margin here */
+        padding: 0 10px;
+    }
+  
+    .slider {
+        width: 100%;
+        margin: 0;
+    }
+
+    .slider-labels {
+        position: absolute;
+        bottom: -20px; /* Position below the slider */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'xkcd-script', sans-serif;
+        font-size: 0.8cm;
+    }
+    
+    .slider-instruction {
+        position: relative;
+        top: -100px;
+        left: -230px; /* Position the arrow correctly */
+        display: flex;
+        align-items: center;
+        margin-top: 0px;
+        margin-bottom: -0px; /* Further reduce space */
+        height: 60px; /* Explicit height, match the slider height */
+    }    
+    
+    .slider-text {
+        font-family: 'xkcd-script', sans-serif;
+        font-size: 0.8cm;
+        position: absolute; /* Allows independent positioning */
+        left: -80px; /* Adjust this value to move the text right */
+        top: -110px; /* Ensure no additional space above */
+        margin: 0; /* Remove margins that could affect positioning */
+    }
+    
+    .arrow {
+        font-family: 'xkcd-script', sans-serif;
+        transform: rotate(0deg); /* Rotate the arrow to point towards the left end of the slider */
+    }    
+
+    .celebrity-info {
+        margin-bottom: 20px; /* Increase space between celebrity name and images */
+    }
+    .reference-images-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .reference-image {
+        max-width: 19%; /* Max width of 19% of the total slider */
+        max-height: calc(19vw * 1.2); 
+        object-fit: cover;
+        aspect-ratio: 1 / 1; /* Ensures the image remains square */
+        background-color: #f0f0f0; /* Light gray background to show image boundaries */
+    }
+    .generated-images-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .generated-image {
+        width: 18%; /* Approximately one-fifth of the container width */
+        aspect-ratio: 1 / 1; /* Ensures the image remains square */
+        object-fit: cover;
+    }
+
+    .bibtex-box {
+        border: 2px solid #ccc;  /* Box border */
+        padding: 0px;           /* Padding inside the box */
+        background-color: #f9f9f9; /* Light background */
+        position: relative;       /* So the button can be positioned inside */
+    }
+
+    .content pre {
+        margin: 0 !important; /* margin after bibtex code box */
+    }
+
+    .text-muted-abs {
+      font-size: 19px;
+      color: #777;
+    }
+    
+    #copyButton {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 0.7em;  /* Smaller font size for the 'Copy' button */
+        padding: 5px 5px; /* Keep button size reasonable */
+    }
+    @media (max-width: 768px) {
+      .team {
+        grid-template-columns: repeat(2, 1fr); /* 屏幕变小时每行两列 */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team {
+        grid-template-columns: 1fr; /* 更小屏幕时每行一列 */
+      }
+    }
+</style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+<nav>
+  <ul>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#tracks">Tracks</a></li>
+    <li><a href="#dataset">Dataset</a></li>
+    <li><a href="#evaluation">Evaluation Metrics</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#bibtex">Cite Us</a></li>
+    <li><a href="#Organizer">Organizer</a></li>
+  </ul>
+</nav>
+
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ICDAR 2025 Competition on End-to-End Document Image
+        Machine Translation Towards Complex Layouts">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICDAR 2025 Competition on End-to-End Document Image
+    Machine Translation Towards Complex Layouts</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/counting_images/dice-svgrepo-com.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+
+<!-- Title -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 publication-title">ICDAR 2025 Competition on End-to-End Document Image
+            Machine Translation Towards Complex Layouts<br>of Text in Natural Images</h2>
+          <div class="is-size-5 publication-authors">
+            <!-- First row of authors -->
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=bAN6Lj0AAAAJ&hl=en">Yaping Zhang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=09YqQNsAAAAJ&hl=en&oi=sra">Yang Zhao</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=09YqQNsAAAAJ&hl=en&oi=sra">Lu Xiang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=oHIDCTsAAAAJ&hl=en&oi=sra">Zhiyang Zhang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=rC1XVOkAAAAJ&hl=en">Yupu Liang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://nlpr.ia.ac.cn/cip/introduction.htm">Zhiyuan Chen</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://nlpr.ia.ac.cn/cip/introduction.htm">Binyao Xu</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=DDpBW7wAAAAJ&hl=en&oi=ao">Yu Zhou</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=l8lvKOQAAAAJ&hl=en">Chengqing Zong</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <!-- Affiliation row -->
+            <span class="author-block">Institute of Automation, Chinese Academy of Sciences</span>
+            <span class="author-block">University of Chinese Academy of Sciences, Beijing, China</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Anthology PDF Link. -->
+              <span class="link-block">
+                <a href="https://aclanthology.org/2023.findings-emnlp.673.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>LayoutDIT</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://aclanthology.org/2024.naacl-long.392.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>DIMTDA</span>
+                </a>
+              </span>
+              <!-- arXiv Link.
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              -->
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/liangyupu/DoTA_dataset"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>DoTA_dataset</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Abstract -->
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified"><p class="text-muted-abs">
+          Document Image Machine Translation (DIMT) task aims to translate
+          text embedded in document images from one language to another.
+          It’s a multi-modal task that requires the integration of both textual
+          content and document layout, bridging the gap between optical
+          character recognition (OCR) and natural language processing (NLP).
+          The proposed DIMT 2025 Challenge aims to advance research in
+          end-to-end document image machine translation, a rapidly evolving area in multi-modal document understanding. The competition
+          consists of two tracks: OCR-free and OCR-based, each offering two
+          subtasks—small models and large models. Participants can choose
+          whether or not to utilize OCR results but must implement a single, end-to-end DIMT model. By promoting innovative end-to-end
+          document translation techniques, this challenge seeks to push the
+          boundaries of document intelligence and multilingual translation.
+          It also aims to explore the performance differences between large
+          language models (LLMs) and smaller models on complex layout
+          document images, advancing both the field of document processing
+          and multilingual capabilities. </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<!-- Benchmark Overview -->
+<section class="architecture" id="introduction">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Introduction</h2>
+        <div class="hero-body">
+          <img src="./static/images/figures1.png" alt="Motivating example image showing contextually-dependent translations of EXIT from English to German" class="image-half-width" style="margin-top: -1cm; margin-bottom: 1.2cm;">
+          <figcaption><b>Figure 1: Document image examples of the DIMT 2025 challenge. <br>(a)(b): Web document examples in Track 1; (c)(d): arXiv
+            document examples in Track 2.</b></figcaption> <br>
+          <p class="content-centered">
+            Document images such as scans and PDF renderings are important
+            carriers of human knowledge. With the advancement of digitalization, techniques for automatically recognizin, understanding
+            , and translating document images have become a crucial part of digital transformation. Among them, Document Image
+            Machine Translation (DIMT) is not only necessary for real-world
+            communication but also essential for many downstream tasks, such
+            as cross-lingual document retrieval, summarization, and
+            information extraction. Over the past few years, DIMT technology has achieved remarkable progress with the development of
+            deep learning. However, existing technologies are difficult
+            to meet the demand for practical applications. The main reasons
+            lie in the following aspects:
+            (1) Multi-modality and cross-linguality: Due to the inherent
+            multi-modality nature, real-world document images often
+            involve a intricate combination of complex layout, dense
+            text, and visually-rich elements, resulting in difficulties in
+            their comprehensive understanding and the cross-lingual
+            translation.
+            (2) Image and text noise: Many factors such as image defect or
+            OCR error may cause noise to the image or text as model
+            input, leading to additional challenges to a DITM system.
+            (3) Lack of samples and a unified benchmark: Due to the high
+            annotation cost and different annotation protocals, existing
+            datasets often suffer insufficient samples, inconsistent labels
+            and evaluation metrics, resulting in model performance that
+            are not directly comparable.
+            <br/><br/>
+            To advance the research field of DIMT, we plan to launch a
+            Document Image Machine Translation challenge (DIMT 2025).
+            This challenge aims to provide adequate samples with standarlized annotations and metric to establish benchmark results with
+            clear, replicable settings. The DIMT 2025 challenge focus on the
+            translation of real-world complex-layout document images, taking
+            into account two document domains including web documents and
+            academic articles(see Figure 1).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIMETIC2 Architecture -->
+<section class="section" id="tracks">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Tracks</h2>
+        <div class="hero-body">
+          <p class="content-centered">
+            Based on the input type, we release two tracks:<br/> <b>1) OCR-based DIMT</b>,
+            where model inputs include the image and its OCR results (word
+            and word bounding box). <br/><b>2) OCR-free DIMT</b>, where model input is
+            the image. Both tracks are given English document images and are
+            required to translate them to Chinese.<br>
+            <br/><p style="text-align: center;font-size: 18px;"><b>Track 1. OCR-based DIMT</b></p><br>
+            <p style="text-align: left; font-size: 18px;">This track focuses on translating text from document images where
+            OCR results (containing words and word bounding boxes) are provided. The task aims to generate an intact, ordered target translation
+            from the raw, often chaotic OCR-extracted words in an end-to-end
+            manner. Participants are required to handle misordered, fragmented,
+            or disjointed OCR outputs and accurately reorder them while translating the text into the target language. The goal is to produce
+            a coherent and structured target-language text that reflects the
+            original document’s content and layout, ensuring the translation
+            maintains both meaning and order.<br/>
+            <b>Track 1.1 OCR-based DIMT-LLM:</b> aims to evaluate the performance of LLM-based methods on the DIMT task. In this sub-track,
+            participants must use large language models (LLMs) with over 1 billion parameters to achieve the OCR-based DIMT task. Open-source
+            LLMs can be utilized, and participants are allowed to fine-tune
+            these models to improve performance. The number of parameters
+            in the model must be specified in the submitted reports used during
+            inference.<br/>
+            <b>Track 1.2 OCR-based DIMT-Small:</b> aims to evaluate the performance of small model-based methods on the DIMT task. In this
+            sub-track, participants are only allowed to use small models, where
+            the number of parameters is fewer than 1 billion, to achieve the
+            OCR-based DIMT task. Participants must focus on optimizing these
+            smaller models for accurate translation and reordering. The number of parameters in the model must be specified in the submitted
+            reports used during inference.</p>
+            <br/><p style="text-align: center;font-size: 18px;"><b>Track 2. OCR-free DIMT</b></p><br>
+            <p style="text-align: left; font-size: 18px;">This track focuses on an OCR-free approach to Document Image
+            Machine Translation, where participants are tasked with translating a source document image directly into a markdown-formatted
+            target translation without any OCR assistance in an end-to-end
+            way. In the OCR-free scene, participants must handle the complex
+            layout and contextual information directly from the image, delivering a coherent and accurate translation in the target language.
+            The final submission must follow markdown format reflecting the
+            content and layout of the original document.<br/>
+            <b>Track 2.1 OCR-free DIMT-LLM:</b> aims to evaluate the performance of LLM-based methods on the OCR-free DIMT task. In
+            this sub-track, participants must use large language models (LLMs)
+            with over 1 billion parameters to achieve the OCR-free DIMT task.
+            Open-source LLMs can be utilized and fine-tuned to handle complex layouts and long context translation. Participants must specify
+            the number of parameters in the model used during inference in
+            their submitted reports.<br/>
+            <b>Track 2.2 OCR-free DIMT-Small:</b> aims to evaluate the performance of small model-based methods on the OCR-free DIMT
+            task. In this sub-track, participants are only permitted to use small
+            models with fewer than 1 billion parameters to achieve the OCRfree DIMT task. Participants must work within these constraints,
+            focusing on optimizing smaller models to handle complex layouts
+            and long context. The number of parameters in the model must be
+            specified in the submitted reports used during inference.
+            </p>
+          </p>
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Benchmark Overview -->
+<section class="architecture" id="dataset">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Dataset</h2>
+        <div class="hero-body">
+          <p class="content-centered">
+            The competitition dataset statistics are summarized in Table 1:
+            For Track 1, we provide a train set containing 300K images and a
+            valid set of 1K images. All images are converted from open-source
+            web documents available on the internet. Each image is accompanied by corresponding OCR results (word and word bounding box),
+            word-level reading order index, sentence-level and document-level
+            translation.
+            For Track 2, we provide a train set containing 124K images
+            and a valid set of 1K images. All images are converted from PDF
+            and latex files crawled from Arixv. Each image is accompanied by
+            corresponding source language text and target language text inmarkdown format. For details of the dataset, please refer to our
+            work. 
+          </p>
+          <br/><br/>
+          <table border="1" align="center" style="width: 80%; border: 1px solid black; margin: 0 auto;">
+            <caption><b>Table1:Statistical information of the DIMT 2025 challenge.</b></caption>
+            <thead>
+              <tr>
+                <th rowspan="20">Track</th>
+                <th rowspan="20">Dataset</th>
+                <th colspan="30"># of Examples</th>
+              </tr>
+              <tr>
+                <th>Train</th>
+                <th>Valid</th>
+                <th>Test</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Track 1</td>
+                <td>DIMT-WebDoc-300K</td>
+                <td>300K</td>
+                <td>1K</td>
+                <td>1K</td>
+              </tr>
+              <tr>
+                <td>Track 2</td>
+                <td>DIMT-arXiv-124K</td>
+                <td>124K</td>
+                <td>1K</td>
+                <td>1K</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="evaluation">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Evaluation Metrics</h2>
+        <div class="hero-body">
+          <p class="content-centered">
+            We will provide evaluation scripts for both tracks:
+            For Track 1, the metric is document-level BLEU and chrF++
+            for both translated target language text and reordered source
+            language text.
+            For Track 2, the metric is document-level BLEU, chrF++ and
+            BLEU-PT for translated target language text in markdown format.
+            As the translated texts contain formulas and tables in markdown
+            format that influence the BLEU computing, we remove them from
+            both reference texts and predictions, keep the plain texts, and calculate BLEU noted as BLEU-PT.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="architecture" id="schedule">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Schedule</h2>
+        <div class="hero-body">
+          <table style="border-collapse: collapse; width: 85%; margin: auto;">
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f4f4f4; font-weight: bold;">Event</th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f4f4f4; font-weight: bold;">Date</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Competition website available</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">December 10, 2024</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Training data and baseline code available</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">January 10, 2025</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Test data release</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">February 20, 2025</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Submission site opens</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">March 20, 2025</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Deadline for competition submissions</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">April 10, 2025</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">Deadline for competition reports</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: left;">April 20, 2025</td>
+            </tr>
+         </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- BibTeX Section -->
+<section class="section" id="bibtex">
+  <div class="container is-centered is-max-desktop content">
+    <h2 class="title has-text-centered">Cite Us</h2>
+    
+    <!-- Box styling for the BibTeX -->
+    <div class="bibtex-box">
+      <pre><code id="bibtexCode">@inproceedings{zhang-etal-2023-layoutdit,
+        title = "{L}ayout{DIT}: Layout-Aware End-to-End Document Image Translation with Multi-Step Conductive Decoder",
+        author = "Zhang, Zhiyang  and
+        Zhang, Yaping  and
+        Liang, Yupu  and
+        Xiang, Lu  and
+        Zhao, Yang  and
+        Zhou, Yu  and
+        Zong, Chengqing",
+        editor = "Bouamor, Houda  and
+        Pino, Juan  and
+        Bali, Kalika",
+        booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+        month = dec,
+        year = "2023",
+        address = "Singapore",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/2023.findings-emnlp.673",
+        doi = "10.18653/v1/2023.findings-emnlp.673",
+        pages = "10043--10053",
+        }
+      </code></pre>
+      
+      <!-- Copy button -->
+      <button id="copyButton" class="button is-dark">Copy</button>
+    </div>
+
+    <!-- Box styling for the BibTeX -->
+    <div class="bibtex-box">
+      <pre><code id="bibtexCode">@inproceedings{liang-etal-2024-document,
+        title = "Document Image Machine Translation with Dynamic Multi-pre-trained Models Assembling",
+        author = "Liang, Yupu  and
+        Zhang, Yaping  and
+        Ma, Cong  and
+        Zhang, Zhiyang  and
+        Zhao, Yang  and
+        Xiang, Lu  and
+        Zong, Chengqing  and
+        Zhou, Yu",
+        editor = "Duh, Kevin  and
+        Gomez, Helena  and
+        Bethard, Steven",
+        booktitle = "Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+        month = jun,
+        year = "2024",
+        address = "Mexico City, Mexico",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/2024.naacl-long.392",
+        doi = "10.18653/v1/2024.naacl-long.392",
+        pages = "7084--7095",
+        }
+     </code></pre>
+      <!-- Copy button -->
+      <button id="copyButton" class="button is-dark">Copy</button>
+  </div>
+</section>
+
+<section class="architecture" id="Organizer">
+  <div class="container">
+    <h2 class="title is-3 title-centered">Organizer</h2><br>
+    <div class="team">
+      <div class="member">
+        <img src="static/member/zhangyaping.jpg" alt="Yaping Zhang">
+        <h3 class="highlight">Yaping Zhang</h3>
+        <p>Institute of Automation, Chinese Academy of Sciences (CASIA)</p>
+      </div>
+      <div class="member">
+        <img src="static/member/zhaoyang.jpg" alt="Yang Zhao">
+        <h3 class="highlight">Yang Zhao</h3>
+        <p>Institute of Automation, Chinese Academy of Sciences (CASIA)</p>
+      </div>
+      <div class="member">
+        <img src="static/member/xianglu.jpg" alt="Lu Xiang">
+        <h3 class="highlight">Lu Xiang</h3>
+        <p>Institute of Automation, Chinese Academy of Sciences (CASIA)</p>
+      </div>
+      <div class="member">
+        <img src="static/member/zhangzhiyang.jpg" alt="Zhiyang Zhang">
+        <h3 class="highlight">Zhiyang Zhang</h3>
+        <p>Chinese Academy of Sciences</p>
+      </div>
+      <div class="member">
+        <img src="static/member/liangyupu2.jpg" alt="Yupu Liang">
+        <h3 class="highlight">Yupu Liang</h3>
+        <p>Chinese Academy of Sciences</p>
+      </div>
+      <div class="member">
+        <img src="static/member/chenzhiyuan2.jpg" alt="Zhiyuan Chen">
+        <h3 class="highlight">Zhiyuan Chen</h3>
+        <p>Chinese Academy of Sciences</p>
+      </div>
+      <div class="member">
+        <img src="static/member/xubinyao.jpg" alt="Binyao Xu">
+        <h3 class="highlight">Binyao Xu</h3>
+        <p>Chinese Academy of Sciences</p>
+      </div>
+      <div class="member">
+        <img src="static/member/zhouyu2.jpg" alt="Yu Zhou">
+        <h3 class="highlight">Yu Zhou</h3>
+        <p>Institute of Automation, Chinese Academy of Sciences (CASIA)</p>
+      </div>
+      <div class="member">
+        <img src="static/member/zongchengqing.jpg" alt="Chengqing Zong">
+        <h3 class="highlight">Chengqing Zong</h3>
+        <p>Institute of Automation, Chinese Academy of Sciences (CASIA)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="copyNotification" style="display:none; position:fixed; bottom:20px; right:20px; background-color:#28a745; color:white; padding:10px; border-radius:5px; font-size:14px;">
+  BibTeX copied!
+</div>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  document.getElementById('copyButton').addEventListener('click', function() {
+    const bibtexText = document.getElementById('bibtexCode').innerText;
+    navigator.clipboard.writeText(bibtexText).then(function() {
+      // Show success notification
+      const notification = document.getElementById('copyNotification');
+      notification.textContent = 'BibTeX copied!';
+      notification.style.backgroundColor = '#28a745'; // Green for success
+      notification.style.display = 'block';
+
+      // Hide it after 3 seconds
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 3000);
+    }, function() {
+      // Show failure message
+      const notification = document.getElementById('copyNotification');
+      notification.textContent = 'Failed to copy BibTeX.';
+      notification.style.backgroundColor = '#dc3545'; // Red for failure
+      notification.style.display = 'block';
+
+      // Hide it after 3 seconds
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 3000);
+    });
+  });
+</script>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+             Website source code based on the <a
+              href="https://nerfies.github.io/">Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please link them appropriately in your website footer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
