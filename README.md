@@ -1,3 +1,3 @@
-# MER2024-website
+# DIMT25@ICDAR
 
-https://zeroqiaoba.github.io/MER2024-website/
+https://cip-documentai.github.io
