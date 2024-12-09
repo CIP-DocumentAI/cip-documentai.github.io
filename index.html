@@ -39,7 +39,14 @@
     </script>
 <head>
 <style>
-    #copyButton {
+    #copyButton1 {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 0.7em;  /* Smaller font size for the 'Copy' button */
+        padding: 5px 5px; /* Keep button size reasonable */
+    }
+    #copyButton2 {
         position: absolute;
         right: 10px;
         top: 10px;
@@ -172,7 +179,7 @@
         <div class="text-left" style="text-align: center;">
             <div class="col-md-12">
                 <p class="large text-muted">
-                <span> December 10, 2024:  </span><b>We establish an initial … …</b>
+                <span> December 10, 2024:  </span><b>We establish an initial website for DIMT25@ICDAR</b>
                 </p>
             </div>
             
@@ -258,7 +265,7 @@
                     word-level reading order index, sentence-level and document-level translation. <b>For Track 2</b>, we provide a train 
                     set containing 124K images and a valid set of 1K images. All images are converted from PDF and latex files crawled 
                     from Arixv. Each image is accompanied by corresponding source language text and target language text inmarkdown 
-                    format. For details of the dataset, please refer to our work. Please download the <a herf="https://drive.google.com/file/d/1cXNfKHyJzVXg_7kWSf_nVKtsxIZVa517/view?usp=sharing">End User License Agreement</a>, 
+                    format. For details of the dataset, please refer to our work. Please download the <a href="https://drive.google.com/file/d/1b7Z5P2h0E8AZdzUyXrfmfNkBssO6s_eL/view?usp=sharing">End User License Agreement</a>, 
                     fill it out and send it to <a href="dimt2025.contact@gmail.com">dimt2025.contact@gmail.com</a> to access the data. We will review your application and 
                     get in touch as soon as possible. 
                 </p>
@@ -300,8 +307,8 @@
                     <b>Result submission.</b> 
                 </p>
                 
-                <p style="color: rgb(135,206,235)">CodaLab link for DIMT25@ICDAR:  <a href="https://codalab.lisn.upsaclay.fr/competitions/19437"> https://codalab.lisn.upsaclay.fr/competitions/19437  </a> </p>
-                <p style="color: rgb(135,206,235)">CodaLab link for DIMT25@ICDAR: <a href="https://codalab.lisn.upsaclay.fr/competitions/19438"> https://codalab.lisn.upsaclay.fr/competitions/19438  </a> </p>
+                <p style="color: rgb(135,206,235)">CodaLab link for DIMT25@ICDAR-OCR-Free:  <a href="https://codalab.lisn.upsaclay.fr/competitions/21064"> https://codalab.lisn.upsaclay.fr/competitions/21064  </a> </p>
+                <p style="color: rgb(135,206,235)">CodaLab link for DIMT25@ICDAR-OCR-based: <a href="https://codalab.lisn.upsaclay.fr/competitions/21055"> ttps://codalab.lisn.upsaclay.fr/competitions/21055  </a> </p>
               
                 <p class="large text-muted">
                     <b>Paper submission.</b> All participants are encouraged to submit a paper describing their solution to the <a href="dimt2025.contact@gmail.com">dimt2025.contact@gmail.com</a>. 
@@ -310,9 +317,11 @@
                 
                 <br>
                 <p class="large text-muted">
-                    <b>Baseline paper:</b> <a href="https://arxiv.org/abs/2404.17113"> https://arxiv.org/abs/2404.17113 </a>
+                    <b>Track1 Baseline Code & Test Dataset:</b> <a href="https://arxiv.org/abs/2404.17113"> https://arxiv.org/abs/2404.17113 </a>
                     <br>
-                    <b>Baseline code:</b> <a href="https://github.com/zeroQiaoba/MERTools/tree/master/MER2024">https://github.com/zeroQiaoba/MERTools/tree/master/MER2024 </a>
+                    <b>Track2 Baseline Code & Test Dataset:</b> <a href="https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2">https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2 </a>
+                    <br>
+                    <b>Track2 Train Dataset:</b> <a href="https://huggingface.co/datasets/liangyupu/DoTA_dataset">https://huggingface.co/datasets/liangyupu/DoTA_dataset</a>
                     <br>
                     <b>Contact email:</b> <a href="dimt2025.contact@gmail.com">dimt2025.contact@gmail.com</a>
                 </p>
@@ -542,7 +551,7 @@
             </div>
             <!-- Box styling for the BibTeX -->
             <div class="bibtex-box">
-              <pre><code id="bibtexCode">@inproceedings{zhang-etal-2023-layoutdit,
+              <pre><code id="bibtexCode1">@inproceedings{zhang-etal-2023-layoutdit,
                 title = "{L}ayout{DIT}: Layout-Aware End-to-End Document Image Translation with Multi-Step Conductive Decoder",
                 author = "Zhang, Zhiyang  and
                 Zhang, Yaping  and
@@ -566,12 +575,12 @@
               </code></pre>
               
               <!-- Copy button -->
-              <button id="copyButton" class="button is-dark">Copy</button>
+              <button id="copyButton1" class="button is-dark">Copy</button>
             </div>
         
             <!-- Box styling for the BibTeX -->
             <div class="bibtex-box">
-              <pre><code id="bibtexCode">@inproceedings{liang-etal-2024-document,
+              <pre><code id="bibtexCode2">@inproceedings{liang-etal-2024-document,
                 title = "Document Image Machine Translation with Dynamic Multi-pre-trained Models Assembling",
                 author = "Liang, Yupu  and
                 Zhang, Yaping  and
@@ -595,17 +604,43 @@
                 }
               </code></pre>
               <!-- Copy button -->
-              <button id="copyButton" class="button is-dark">Copy</button>
+              <button id="copyButton2" class="button is-dark">Copy</button>
           </div>
     </section>
 
     <div id="copyNotification" style="display:none; position:fixed; bottom:20px; right:20px; background-color:#28a745; color:white; padding:10px; border-radius:5px; font-size:14px;">
         BibTeX copied!
-      </div>
+    </div>
 
     <script>
-    document.getElementById('copyButton').addEventListener('click', function() {
-        const bibtexText = document.getElementById('bibtexCode').innerText;
+    document.getElementById('copyButton1').addEventListener('click', function() {
+        const bibtexText = document.getElementById('bibtexCode1').innerText;
+        navigator.clipboard.writeText(bibtexText).then(function() {
+        // Show success notification
+        const notification = document.getElementById('copyNotification');
+        notification.textContent = 'BibTeX copied!';
+        notification.style.backgroundColor = '#28a745'; // Green for success
+        notification.style.display = 'block';
+    
+        // Hide it after 3 seconds
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 3000);
+        }, function() {
+        // Show failure message
+        const notification = document.getElementById('copyNotification');
+        notification.textContent = 'Failed to copy BibTeX.';
+        notification.style.backgroundColor = '#dc3545'; // Red for failure
+        notification.style.display = 'block';
+    
+        // Hide it after 3 seconds
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 3000);
+        });
+    });
+    document.getElementById('copyButton2').addEventListener('click', function() {
+        const bibtexText = document.getElementById('bibtexCode2').innerText;
         navigator.clipboard.writeText(bibtexText).then(function() {
         // Show success notification
         const notification = document.getElementById('copyNotification');
