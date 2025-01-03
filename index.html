@@ -60,6 +60,113 @@
     }
     .navbar-nav {
         margin-left: 220px;
+        /* margin-left: auto;  取消左边的空隙 */
+        text-align: center;  /* 中央对齐菜单 */
+    }
+    
+    @media (max-width: 1100px) {
+        .navbar-toggle {
+            display: block; /* 在手机端显示折叠按钮 */
+        }
+        .navbar-nav {
+            margin-left: 0;
+        }
+        .navbar-collapse {
+            text-align: center;  /* 手机端菜单项居中 */
+        }
+        .navbar-nav li {
+            display: inline-block;
+            margin: 5px 0;
+        }
+    }
+    /* 设置不同屏幕下的标题和文本大小 */
+    .intro-heading, .intro-heading-large {
+        font-size: 1.5em;  /* 中等屏幕下的标题大小 */
+    }
+
+    @media (max-width: 1100px) {
+        .intro-heading {
+            font-size: 1.2em;  /* 手机端字体大小 */
+        }
+        .intro-heading-large {
+            font-size: 1.3em;
+        }
+    }
+
+    .large {
+        font-size: 1.2em; /* 适配更小屏幕时的内容 */
+    }
+
+    @media (max-width: 1100px) {
+        .large {
+            font-size: 1em;
+        }
+    }
+    /* 使表格在手机端适应屏幕 */
+    table {
+        width: 100%;
+        table-layout: auto;  /* 自动调整列宽 */
+    }
+
+    @media (max-width: 1100px) {
+        table {
+            overflow-x: auto;
+            display: block;  /* 使表格可以水平滚动 */
+        }
+    }
+    @media (max-width: 1100px) {
+        .intro-text {
+            padding: 20px;  /* 减少大屏幕上的间距 */
+        }
+        .intro-heading-large {
+            font-size: 1.8em;  /* 在手机端让标题变小 */
+        }
+    }
+    #copyButton1, #copyButton2 {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 0.8em; /* 小屏设备调整按钮的大小 */
+        padding: 6px 8px;
+    }
+
+    @media (max-width: 1100px) {
+        #copyButton1, #copyButton2 {
+            font-size: 0.6em;
+            padding: 4px 6px;
+        }
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    /* 对应布局 */
+    @media (max-width: 1100px) {
+        .container {
+            padding: 0 15px;  /* 手机端容器两边留点空隙 */
+        }
+
+        .row {
+            display: block;  /* 让所有列占满整行 */
+        }
+
+        .col-md-12, .col-lg-12 {
+            width: 100%;  /* 在小屏幕下让每一列都占满整行 */
+        }
+    }
+    /* 对section元素做适配 */
+    @media (max-width: 1100px) {
+        section {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .section-heading {
+            font-size: 1.5em;  /* 标题大小调整 */
+        }
+        .text-justify {
+            text-align: left;  /* 在小屏幕设备上避免过度紧凑 */
+        }
     }
 </style>
 
@@ -122,7 +229,7 @@
                 <div class="intro-heading-large">Machine Translation </div>
                 <br><br> 
                 <br><br>              
-                <div class="intro-heading"> Towards Complex Layouts of Text in Natural Images</div>
+                <div class="intro-heading" style="margin-top: 20px; margin-bottom: 20px; line-height: 1.5;"> Towards Complex Layouts of Text in Natural Images</div>
                 <br><br>
             </div>
         </div>
@@ -266,7 +373,7 @@
                     get in touch as soon as possible. 
                 </p>
                 <div style="text-align: center;">
-                  <table border="3" style="width: 80%; height: 150px; border: 1px solid black; margin: 0 auto; text-align: center;">
+                  <table border="3" style="width: 80%; border: 1px solid black; margin: 0 auto; text-align: center;">
                     <caption class="large text-muted" style="text-align: center;"><b>Table1:Statistical information of the DIMT 2025 challenge.</b></caption>
                     <thead>
                       <tr style="text-align: center;">
