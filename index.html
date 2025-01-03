@@ -65,18 +65,19 @@
     }
     
     @media (max-width: 1100px) {
-        .navbar-toggle {
-            display: block; /* 在手机端显示折叠按钮 */
-        }
         .navbar-nav {
-            margin-left: 0;
+            width: 100%;  /* 确保菜单项容器的宽度占满屏幕 */
+            text-align: center;  /* 中央对齐菜单项 */
         }
-        .navbar-collapse {
-            text-align: center;  /* 手机端菜单项居中 */
-        }
+
         .navbar-nav li {
-            display: inline-block;
-            margin: 5px 0;
+            display: block;  /* 每个菜单项占一行 */
+            width: 100%;  /* 确保每个菜单项也占满屏幕 */
+            text-align: left;  /* 中央对齐菜单项 */
+        }
+
+        .navbar-toggler {
+            margin-left: auto;  /* 折叠按钮右对齐 */
         }
     }
     /* 设置不同屏幕下的标题和文本大小 */
@@ -162,11 +163,17 @@
         }
 
         .section-heading {
-            font-size: 1.5em;  /* 标题大小调整 */
+            font-size: 0.7em;  /* 标题大小调整 */
         }
         .text-justify {
             text-align: left;  /* 在小屏幕设备上避免过度紧凑 */
         }
+    }
+    .auto-wrap-link {
+        word-wrap: break-word;  /* 自动换行 */
+        word-break: break-word; /* 强制长单词换行 */
+        display: inline-block;  /* 保证它作为块级元素处理 */
+        max-width: 100%;        /* 保证不超出父容器 */
     }
 </style>
 
@@ -300,7 +307,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">DIMT2025 CHALLENGE@ICDAR</h2>
+                <h2 class="section-heading" style="word-wrap: break-word;">DIMT2025 CHALLENGE@ICDAR</h2>
                 <!-- <h3 class="section-subheading text-muted" style="font-size:large">Contact with us: <a href="mailto:fl4pwsdm@gmail.com">fl4pwsdm@gmail.com</a></h3> -->
             </div>
         </div>
@@ -420,13 +427,13 @@
                 
                 <br>
                 <p class="large text-muted">
-                    <b>Track 1 Baseline Code & Train, Test Dataset:</b> <a href="https://huggingface.co/datasets/zhangzhiyang/DIMT2025.ICDAR.Track_1"> https://huggingface.co/datasets/zhangzhiyang/DIMT2025.ICDAR.Track_1 </a>
+                    <b>Track 1 Baseline Code & Train, Test Dataset:</b> <a href="https://huggingface.co/datasets/zhangzhiyang/DIMT2025.ICDAR.Track_1" class="auto-wrap-link"> https://huggingface.co/datasets/zhangzhiyang/DIMT2025.ICDAR.Track_1 </a>
                     <br>
-                    <b>Track 2 Baseline Code & Test Dataset:</b> <a href="https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2">https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2 </a>
+                    <b>Track 2 Baseline Code & Test Dataset:</b> <a href="https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2" class="auto-wrap-link">https://huggingface.co/liangyupu/DIMT2025.ICDAR.Track_2 </a>
                     <br>
-                    <b>Track 2 Train Dataset:</b> <a href="https://huggingface.co/datasets/liangyupu/DoTA_dataset">https://huggingface.co/datasets/liangyupu/DoTA_dataset</a>
+                    <b>Track 2 Train Dataset:</b> <a href="https://huggingface.co/datasets/liangyupu/DoTA_dataset" class="auto-wrap-link">https://huggingface.co/datasets/liangyupu/DoTA_dataset</a>
                     <br>
-                    <b>Contact email:</b> <a href="dimt2025.contact@gmail.com">dimt2025.contact@gmail.com</a>
+                    <b>Contact email:</b> <a href="dimt2025.contact@gmail.com" class="auto-wrap-link">dimt2025.contact@gmail.com</a>
                 </p>
 
                 <br>
